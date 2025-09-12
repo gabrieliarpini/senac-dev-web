@@ -14,7 +14,7 @@ namespace MeuCorre.Application.UseCases.Usuarios.Commands
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Senha é obrigatória!")]
-        [MaxLength(6,ErrorMessage="Senha deve ter no mínimo 6 caracteres ")]
+        [MinLength(6,ErrorMessage="Senha deve ter no mínimo 6 caracteres ")]
         public string Senha { get; set; }
 
         [Required(ErrorMessage = "Data de Nascimento é obrigatória!")]
@@ -34,14 +34,7 @@ namespace MeuCorre.Application.UseCases.Usuarios.Commands
             var usuarioExixtente = await _usuarioRepository.ObterPorEmail(request.Email);
             if (usuarioExixtente != null)
             {
-                return ("Já existe um usuário cadastrado com este email.",false);
-            }
-
-            var ano = DateTime.Now.Year;
-            var idade = ano - request.DataNascimento.Year;
-            if (idade < 13)
-            {
-                return ("Usuário deve ter no mínimo 13 anos.",false);
+                return ("Já existe um usuário cadastrado com este email.", false);
             }
 
             var novoUsuario = new Usuario(

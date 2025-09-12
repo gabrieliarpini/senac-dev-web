@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Runtime.InteropServices.JavaScript;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices.JavaScript;
+using System.Text.RegularExpressions;
 
 namespace MeuCorre.Domain.Entities
 {
@@ -16,51 +11,59 @@ namespace MeuCorre.Domain.Entities
         public DateTime DataNascimento { get; private set; }
         public bool Ativo { get; private set; }
 
-        //Propriedade de navegação para a entidade Categoria pois o usuário pode ter várias categorias
-        public virtual ICollection<Categoria> Categorias { get; private set; }
+        // Propriedade de navegação para a entidade Categoria pois
+        // o usuário pode ter várias categorias
+        public virtual ICollection<Categoria> Categorias { get; set; }
+
 
         //Construtor para criar um novo usuário.
         //Construtor é a primeira coisa que é executada quando uma classe é instanciada.
-        public Usuario(string nome, string email,string senha, DateTime dataNascimento, bool ativo)
+        public Usuario(string nome, string email, string senha, DateTime dataNascimento, bool ativo)
         {
-            if(!TemIdadeMinima())
-            {
-                throw new Exception("Usuário deve ter no mínimo 13 anos.");
-            }
-
             Nome = nome;
             Email = email;
             Senha = ValidarSenha(senha);
-            DataNascimento = dataNascimento;
+            DataNascimento = ValidarIdadeMinina(dataNascimento);
             Ativo = ativo;
         }
 
         //Regra negocio: Permite apenas usários maiores de 13 anos.
-        private int CalcularIdade()
+        private DateTime ValidarIdadeMinina(DateTime nascimento)
         {
             var hoje = DateTime.Today;
-            var idade = hoje.Year - DataNascimento.Year;
+            var idade = hoje.Year - nascimento.Year;
 
-            if (DataNascimento.Date > hoje.AddYears(-idade))
+            if (nascimento.Date > hoje.AddYears(-idade))
                 idade--;
 
-            return idade;
-        }
+            if (idade < 13)
+            {
+                //Interrompe o processo devolvendo o erro
+                throw new Exception("Usuário deve ter no minimo 13 anos");
+            }
 
-        private bool TemIdadeMinima()
-        {
-            var resultado = CalcularIdade() >= 13;
-            return resultado;
+            return nascimento;
         }
 
         public string ValidarSenha(string senha)
         {
-            if(senha.Length < 6)
+            //Regra de negocio: pelo menos uma letra e um número.
+            if (!Regex.IsMatch(senha, "[a-z]"))
             {
-                //Todo fazer um tratamento de erro melhor
+                throw new Exception("A senha deve contar pelo menos uma letra minuscula");
             }
+            if (!Regex.IsMatch(senha, "[A-Z]"))
+            {
+                throw new Exception("A senha deve contar pelo menos uma letra maiuscula");
+            }
+            if (!Regex.IsMatch(senha, "[0-9]"))
+            {
+                throw new Exception("A senha deve contar pelo menos um números");
+            }
+
             return senha;
         }
+
         public void AtivarUsuario()
         {
             Ativo = true;

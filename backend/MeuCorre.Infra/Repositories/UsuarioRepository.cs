@@ -1,4 +1,5 @@
-﻿using MeuCorre.Domain.Entities;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using MeuCorre.Domain.Entities;
 using MeuCorre.Domain.Interfaces.Repositories;
 using MeuCorre.Infra.Context;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ namespace MeuCorre.Infra.Repositories
     public class UsuarioRepository : IUsuarioRepository
     {
         private readonly MeuDbContext _meuDbContext;
+       
 
         public UsuarioRepository(MeuDbContext meuDbContext)
         {
@@ -29,6 +31,11 @@ namespace MeuCorre.Infra.Repositories
         public async Task<Usuario?> ObterPorEmail(string email)
         {
             return await _meuDbContext.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
+        }
+
+        public Task ObterPorIdAsync(Guid id)
+        {
+            throw new NotImplementedException();
         }
 
         public Task RemoverUsuarioAsync(Usuario usuario)

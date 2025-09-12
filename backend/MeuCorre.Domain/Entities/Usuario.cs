@@ -5,10 +5,10 @@ namespace MeuCorre.Domain.Entities
 {
     public class Usuario : Entidade
     {
-        public string Nome { get; private set; }
-        public string Email { get; private set; }
-        public string Senha { get; private set; }
-        public DateTime DataNascimento { get; private set; }
+        public string Nome { get; set; }
+        public string Email { get; set; }
+        public string Senha { get; set; }
+        public DateTime DataNascimento { get;  set; }
         public bool Ativo { get; private set; }
 
         // Propriedade de navegação para a entidade Categoria pois
@@ -20,11 +20,28 @@ namespace MeuCorre.Domain.Entities
         //Construtor é a primeira coisa que é executada quando uma classe é instanciada.
         public Usuario(string nome, string email, string senha, DateTime dataNascimento, bool ativo)
         {
+            ValidarEntidadeUsuario(email,senha, dataNascimento);
+
             Nome = nome;
             Email = email;
-            Senha = ValidarSenha(senha);
-            DataNascimento = ValidarIdadeMinina(dataNascimento);
+            Senha = senha;
+            DataNascimento = dataNascimento;
             Ativo = ativo;
+        }
+
+        private void ValidarEntidadeUsuario(string email, string senha, DateTime nascimento) 
+        {
+            ValidarIdadeMinina(nascimento);
+            ValidarSenha(senha);
+            ValidarEmail(email);
+        }
+
+        private void ValidarEmail(string email)
+        {
+            if (!Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                throw new Exception("Email em formato inválido");
+            }
         }
 
         //Regra negocio: Permite apenas usários maiores de 13 anos.
@@ -45,7 +62,7 @@ namespace MeuCorre.Domain.Entities
             return nascimento;
         }
 
-        public string ValidarSenha(string senha)
+        public void ValidarSenha(string senha)
         {
             //Regra de negocio: pelo menos uma letra e um número.
             if (!Regex.IsMatch(senha, "[a-z]"))
@@ -61,7 +78,6 @@ namespace MeuCorre.Domain.Entities
                 throw new Exception("A senha deve contar pelo menos um números");
             }
 
-            return senha;
         }
 
         public void AtivarUsuario()

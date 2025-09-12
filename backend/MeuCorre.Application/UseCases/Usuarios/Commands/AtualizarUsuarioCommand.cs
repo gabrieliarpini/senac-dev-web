@@ -29,27 +29,25 @@ namespace MeuCorre.Application.UseCases.Usuarios.Commands
         public async Task<(string, bool)> Handle(AtualizarUsuarioCommand request, CancellationToken cancellationToken)
         {
             // 1. Buscar usuário existente
-            var usuarioExixtente = await _usuarioRepository.ObterPorIdAsync(request.Id);
-            if (usuarioExixtente == null)
+            var usuarioExiste = await _usuarioRepository.ObterPorIdAsync(request.Id);
+            if (usuarioExiste == null)
             {
                 return ("Usuário não encontrado.", false);
             }
 
             // 2. Validar se o usuário possui dados essenciais (ex: Email cadastrado)
-            if (string.IsNullOrWhiteSpace(usuarioExixtente.Email))
+            if (string.IsNullOrWhiteSpace(usuarioExiste.Email))
             {
                 return ("Usuário não possui email cadastrado, impossível atualizar o perfil.", false);
             }
 
             // 3. Alterar apenas nome e data de nascimento
-            usuarioExistente.Nome = request.Nome;
-            usuarioExistente.DataNascimento = request.DataNascimento;
+            usuarioExiste.Nome = request.Nome;
+            usuarioExiste.DataNascimento = request.DataNascimento;
+            usuarioExiste.Email = request.Email;
 
-            // 4. Atualizar data de modificação
-            usuarioExistente.DataModificacao = DateTime.UtcNow;
-
-            // 5. Persistir alterações
-            await _usuarioRepository.AtualizarUsuarioAsync(usuarioExistente);
+            // 4. Persistir alterações
+            await _usuarioRepository.AtualizarUsuarioAsync(usuarioExiste);
 
             return ("Perfil atualizado com sucesso.", true);
         }

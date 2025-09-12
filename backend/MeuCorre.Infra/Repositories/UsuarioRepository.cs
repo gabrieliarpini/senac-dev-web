@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
 using MeuCorre.Domain.Entities;
 using MeuCorre.Domain.Interfaces.Repositories;
 using MeuCorre.Infra.Context;
@@ -9,7 +10,6 @@ namespace MeuCorre.Infra.Repositories
     public class UsuarioRepository : IUsuarioRepository
     {
         private readonly MeuDbContext _meuDbContext;
-       
 
         public UsuarioRepository(MeuDbContext meuDbContext)
         {
@@ -33,9 +33,9 @@ namespace MeuCorre.Infra.Repositories
             return await _meuDbContext.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
         }
 
-        public Task ObterPorIdAsync(Guid id)
+        public async Task<Usuario?> ObterPorIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _meuDbContext.Usuarios.FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public Task RemoverUsuarioAsync(Usuario usuario)
@@ -43,6 +43,8 @@ namespace MeuCorre.Infra.Repositories
            _meuDbContext.Usuarios.Remove(usuario);
             return _meuDbContext.SaveChangesAsync();
         }
+
+       
     }
 }
  

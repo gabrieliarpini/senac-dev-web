@@ -1,46 +1,31 @@
 ﻿using MeuCorre.Domain.Entities;
 using MeuCorre.Domain.Enums;
-using MeuCorre.Domain.Interfaces.Repositories;
-using MeuCorre.Infra.Context;
 
-namespace MeuCorre.Infra.Repositories
+namespace MeuCorre.Domain.Interfaces.Repositories
 {
-    public class CategoriaRepository : ICategoriaRepository
+    public interface ICategoriaRepository
     {
-        public Task AdicionarAsync(Categoria categoria)
-        {
-            await _meuDbContext.Categoria.AddAsync(categoria);
-            await _meuDbContext.SaveChangesAsync();
-        }
+        //Retorna do banco de dados os dados de uma categoria que possua o Id informado
+        Task<Categoria> ObterPorIdAsync(Guid categoriaId);
 
-        public Task AtualizarAsync(Categoria categoria)
-        {
-            throw new NotImplementedException();
-        }
+        //Retorna do banco de dados todas as categorias que pertençam ao usuário informado
+        Task<IEnumerable<Categoria>> ObterTodosAsync(Guid usuarioId);
 
-        public Task<bool> ExisteAsync(Guid categoriaId)
-        {
-            throw new NotImplementedException();
-        }
+        //Verificar se uma categoria existe no banco de dados com o Id informado
+        //SELECT * FROM Categorias WHERE Id = 5
+        Task<bool> ExisteAsync(Guid categoriaId);
 
-        public Task<bool> NomeExisteParaUsuarioAsync(string nome, TipoTransacao tipo, Guid usuarioId)
-        {
-            throw new NotImplementedException();
-        }
+        //Verifica se já existe uma categoria com o mesmo
+        //nome e tipo para o usuário informado
+        Task<bool> NomeExisteParaUsuarioAsync(string nome, TipoTransacao tipo, Guid usuarioId);
 
-        public Task<Categoria> ObterPorIdAsync(Guid categoriaId)
-        {
-            throw new NotImplementedException();
-        }
+        //Adiciona uma nova categoria no banco de dados
+        Task AdicionarAsync(Categoria categoria);
 
-        public Task<IEnumerable<Categoria>> ObterTodosAsync(Guid usuarioId)
-        {
-            throw new NotImplementedException();
-        }
+        //Atualiza os dados de uma categoria no banco de dados
+        Task AtualizarAsync(Categoria categoria);
 
-        public Task RemoverAsync(Guid categoriaId)
-        {
-            throw new NotImplementedException();
-        }
+        //Remove uma categoria do banco de dados
+        Task RemoverAsync(Categoria categoria);
     }
 }

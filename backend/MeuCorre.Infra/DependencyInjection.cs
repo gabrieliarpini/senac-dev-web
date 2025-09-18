@@ -1,5 +1,5 @@
 ﻿using MeuCorre.Domain.Interfaces.Repositories;
-using MeuCorre.Infra.Context;
+using MeuCorre.Infra.Data.Context;
 using MeuCorre.Infra.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

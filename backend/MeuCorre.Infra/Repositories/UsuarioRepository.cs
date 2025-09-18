@@ -2,7 +2,7 @@
 using DocumentFormat.OpenXml.Spreadsheet;
 using MeuCorre.Domain.Entities;
 using MeuCorre.Domain.Interfaces.Repositories;
-using MeuCorre.Infra.Context;
+using MeuCorre.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuCorre.Infra.Repositories

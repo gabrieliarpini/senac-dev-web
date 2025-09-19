@@ -15,7 +15,7 @@ namespace MeuCorre.Infra.Data.Configurations
                 .IsRequired()
                 .HasMaxLength(100);
 
-            builder.Property(categoria => categoria.Tipo)
+            builder.Property(categoria => categoria.TipoDaTransacao)
                 .IsRequired();
 
             builder.Property(categoria => categoria.Descricao)

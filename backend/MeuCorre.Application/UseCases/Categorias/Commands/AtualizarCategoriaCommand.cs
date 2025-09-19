@@ -18,6 +18,7 @@ namespace MeuCorre.Application.UseCases.Categorias.Commands
         public string? Descricao { get; set; }
         public string? Cor { get; set; }
         public string? Icone { get; set; }
+        public Guid Id { get; set; }
     }
 
     internal class AtualizarCategoriaCommandHandler : IRequestHandler<AtualizarCategoriaCommand, (string, bool)>

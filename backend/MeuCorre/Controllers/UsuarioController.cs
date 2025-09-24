@@ -2,7 +2,7 @@
 using MeuCorre.Application.UseCases.Usuarios.Commands;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MeuCorre.Controllers
+namespace MeuCorre.Controllers 
 {
     [ApiController]
     [Route("[controller]")]

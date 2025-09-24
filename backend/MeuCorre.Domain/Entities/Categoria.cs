@@ -18,7 +18,7 @@ namespace MeuCorre.Domain.Entities
         //Propriedade de navegação para a entidade Usuario pois o usuário pode ter várias categorias
         public virtual Usuario Usuario { get; private set; }
 
-        public Categoria(Guid usuarioId, string nome, TipoTransacao tipo, string? descricao, string? cor, string? icone)
+        public Categoria(Guid usuarioId, string nome, TipoTransacao tipoDaTransacao, string? descricao, string? cor, string? icone)
         {
             ValidarEntidadeCategoria(cor);
 
@@ -27,7 +27,7 @@ namespace MeuCorre.Domain.Entities
             Descricao = descricao;
             Cor = cor;
             Icone = icone;
-            TipoDaTransacao = tipo;
+            TipoDaTransacao = tipoDaTransacao;
             Ativo = true;
 
         }

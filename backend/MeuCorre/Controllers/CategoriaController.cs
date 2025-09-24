@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
-using MediatR;
+﻿using MediatR;
 using MeuCorre.Application.UseCases.Categorias.Commands;
 using MeuCorre.Application.UseCases.Categorias.Dtos;
 using MeuCorre.Application.UseCases.Categorias.Queries;
@@ -9,6 +8,8 @@ namespace MeuCorre.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+
+    
     public class CategoriaController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -17,15 +18,19 @@ namespace MeuCorre.Controllers
             _mediator = mediator;
         }
         ///<summary>
-        ///Cria uma nova categoria para o usuário
-        ////// </summary>
-        ///<param name="command"> Os dados da nova catgegoria</param>
-        ///<returns>Retorna uma nova categoria criada</returns>
+        /// Cria novas categorias para o usuários
+        ///<summary>
+        ///Cria um novo usuário.
+        ///<para name="command"> Os dados da nova categoriam</param>
+        /// <return>retorna uma categoria criarda</returns>
+        /// 
         [HttpPost]
         [ProducesResponseType(typeof(CategoriaDto), 201)]
-        [ProducesResponseType(400)]
+        [ProducesResponseType (400)]
         [ProducesResponseType(409)]
-        public async Task<IActionResult> CriarCategoria([FromBody] CriarCategoriaCommand command)
+
+
+        public async Task<IActionResult> CriarCategoria([FromBody] CriarCategoriaCommad command)
         {
             var (mensagem, sucesso) = await _mediator.Send(command);
             if (sucesso)
@@ -74,7 +79,7 @@ namespace MeuCorre.Controllers
             var (mensagem, sucesso) = await _mediator.Send(command);
             if (sucesso)
             {
-               return NoContent();
+                return NoContent();
             }
             else
             {
@@ -96,24 +101,25 @@ namespace MeuCorre.Controllers
                 return BadRequest(mensagem);
             }
         }
-
         [HttpGet]
-        public async Task<IActionResult> ObterCategoriasPorUsuario([FromQuery]ListarTodasCategoriasQuery query)
+        public async Task<ActionResult> ObterCategoriaPorUsuario([FromQuery]ListarTodasCategoriasQuery query)
         {
             var categorias = await _mediator.Send(query);
             return Ok(categorias);
-        }
 
+        }
         [HttpGet("{id}")]
-        public async Task <IActionResult> ObterCategoriaPorId (Guid id)
+        public async Task<ActionResult> ObterCategoriaPorId(Guid id)
         {
-            var query = new ObterCategoriaQuery() {CategoriaId = id };
+            var query = new ObterCategoriaQuery() { CategoriaId = id };
             var categoria = await _mediator.Send(query);
-            if(categoria == null)
+            if (categoria == null)
             {
                 return NotFound("Categoria não encontrada");
             }
             return Ok(categoria);
+
         }
+
     }
 }

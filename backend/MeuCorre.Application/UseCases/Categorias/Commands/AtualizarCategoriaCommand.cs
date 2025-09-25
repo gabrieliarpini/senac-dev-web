@@ -52,7 +52,7 @@ namespace MeuCorre.Application.UseCases.Categorias.Commands
                 request.Cor, 
                 request.Icone);
             await _categoriaRepository.AtualizarAsync(categoria);
-            return ("Categoia atualizada com sucesso.", true);
+            return ("Categoria atualizada com sucesso.", true);
         }
     }
 }

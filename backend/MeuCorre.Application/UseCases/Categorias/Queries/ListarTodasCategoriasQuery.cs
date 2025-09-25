@@ -20,7 +20,7 @@ namespace MeuCorre.Application.UseCases.Categorias.Queries
         }
 
         public async Task<IList<CategoriaDto>> Handle(ListarTodasCategoriasQuery request, CancellationToken cancellationToken)
-        {
+         {
             var listaCategorias = await _categoriaRepository.ListarTodasPorUsuarioAsync(request.UsuarioId);
 
             if (listaCategorias == null)

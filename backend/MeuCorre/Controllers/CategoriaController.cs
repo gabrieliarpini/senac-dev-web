@@ -43,10 +43,9 @@ namespace MeuCorre.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> AtualizarCategoria(Guid id, [FromBody] AtualizarCategoriaCommand command)
+        [HttpPut]
+        public async Task<IActionResult> AtualizarCategoria([FromBody] AtualizarCategoriaCommand command)
         {
-            command.Id = id;
             var (mensagem, sucesso) = await _mediator.Send(command);
             if (sucesso)
             {
@@ -72,22 +71,22 @@ namespace MeuCorre.Controllers
             }
         }
 
-        [HttpPatch("{id}/ativar")]
-        public async Task<IActionResult> Ativarategoria(Guid Id)
+        [HttpPatch("ativar/{id}")]
+        public async Task<IActionResult> AtivarCategoria(Guid Id)
         {
             var command = new AtivarCategoriaCommand { CategoriaId = Id };
             var (mensagem, sucesso) = await _mediator.Send(command);
             if (sucesso)
             {
-                return NoContent();
+                return Ok(mensagem);
             }
             else
             {
-                return BadRequest(mensagem);
+                return BadRequest("Categoria possivelmente não encontrada.");
             }
         }
 
-        [HttpPatch("{id}/inativar")]
+        [HttpPatch("inativar/{id}")]
         public async Task<IActionResult> InativarCategoria(Guid Id)
         {
             var command = new InativarCategoriaCommand { CategoriaId = Id };

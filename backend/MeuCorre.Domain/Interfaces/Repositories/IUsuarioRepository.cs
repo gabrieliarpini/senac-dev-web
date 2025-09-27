@@ -15,5 +15,6 @@ namespace MeuCorre.Domain.Interfaces.Repositories
         //?significa que o select pode retornar nulo, ou seja, o usuário pode não ser encontrado
         Task<Usuario?> ObterPorEmail(string email);//SELECT POR EMAIL
         Task<Usuario?> ObterPorIdAsync(Guid id);
+        Task AtualizarAsync(Usuario usuario);
     }
 }

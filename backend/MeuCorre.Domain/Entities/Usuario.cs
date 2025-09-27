@@ -92,5 +92,7 @@ namespace MeuCorre.Domain.Entities
                 throw new Exception("Email em formato inválido");
             }
         }
+
+       
     }
 }

@@ -16,6 +16,12 @@ namespace MeuCorre.Infra.Repositories
             _meuDbContext = meuDbContext;
         }
 
+        public async Task AtualizarAsync(Usuario usuario)
+        {
+            _meuDbContext.Usuarios.Update(usuario);
+            await _meuDbContext.SaveChangesAsync();
+        }
+
         public async Task AtualizarUsuarioAsync(Usuario usuario)
         {
              _meuDbContext.Usuarios.Update(usuario);

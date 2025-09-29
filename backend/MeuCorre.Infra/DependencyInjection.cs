@@ -1,5 +1,5 @@
 ﻿using MeuCorre.Domain.Interfaces.Repositories;
-using MeuCorre.Infra.Context;
+using MeuCorre.Infra.Data.Context;
 using MeuCorre.Infra.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,8 +21,7 @@ namespace MeuCorre.Infra
 
             //Registra os repositorios para eles funcionarem com injeção de dependência
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-
-            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 
             return services;
         }

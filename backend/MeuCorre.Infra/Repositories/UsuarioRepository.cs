@@ -2,7 +2,7 @@
 using DocumentFormat.OpenXml.Spreadsheet;
 using MeuCorre.Domain.Entities;
 using MeuCorre.Domain.Interfaces.Repositories;
-using MeuCorre.Infra.Context;
+using MeuCorre.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuCorre.Infra.Repositories
@@ -14,6 +14,12 @@ namespace MeuCorre.Infra.Repositories
         public UsuarioRepository(MeuDbContext meuDbContext)
         {
             _meuDbContext = meuDbContext;
+        }
+
+        public async Task AtualizarAsync(Usuario usuario)
+        {
+            _meuDbContext.Usuarios.Update(usuario);
+            await _meuDbContext.SaveChangesAsync();
         }
 
         public async Task AtualizarUsuarioAsync(Usuario usuario)

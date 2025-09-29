@@ -8,9 +8,9 @@
 
   <ItemGroup>
     <Folder Include="Common\" />
-    <Folder Include="DTOs\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Mappers\" />
+    <Folder Include="UseCases\Contas\" />
     <Folder Include="UseCases\Relatorios\" />
     <Folder Include="UseCases\Transacoes\" />
     <Folder Include="Validators\" />

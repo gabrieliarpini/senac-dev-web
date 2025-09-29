@@ -2,7 +2,7 @@
 using MeuCorre.Application.UseCases.Usuarios.Commands;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MeuCorre.Controllers
+namespace MeuCorre.Controllers 
 {
     [ApiController]
     [Route("[controller]")]
@@ -31,10 +31,10 @@ namespace MeuCorre.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> AtualizarUsuario(Guid id, [FromBody] AtualizarUsuarioCommand command)
+        [HttpPut]
+        public async Task<IActionResult> AtualizarUsuario( [FromBody] AtualizarUsuarioCommand command)
         {
-            command.Id = id;
+            
             var (mensagem, sucesso) = await _mediator.Send(command);
             if (sucesso)
             {

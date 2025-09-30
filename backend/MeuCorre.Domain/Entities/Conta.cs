@@ -1,14 +1,16 @@
-﻿namespace MeuCorre.Domain.Entities
+﻿using MeuCorre.Domain.Enums;
+
+namespace MeuCorre.Domain.Entities
 {
     public class Conta : Entidade
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
-        public string Tipo { get; set; } // Ex: "Receita ou despesa"
+        public string Cor { get; set; } // Ex: "#FFFFFF"
+        public TipoConta Tipo { get; set; } // Ex: "Cartão de credito"
         public string Moeda { get; set; } // Ex: "BRL"
         public decimal Saldo { get; set; }
-        public decimal? Limite { get; set; }
-        public string TipoLimite { get; set; } // Ex: "Total"
+        public TipoLimite Limite { get; set; }
         public int? DiaVencimento { get; set; }
         public DateTime? VencimentoPrimeiraFatura { get; set; }
         public DateTime? FechamentoFatura { get; set; }
@@ -19,7 +21,6 @@
         public bool Ativo { get; set; }
         public DateTime DataCriacao { get; set; }
         public DateTime? DataAtualizacao { get; set; }
-
         public Usuario Usuario { get; set; }
 
     }

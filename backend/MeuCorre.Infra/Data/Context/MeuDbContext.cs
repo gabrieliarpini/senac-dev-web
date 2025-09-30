@@ -16,6 +16,7 @@ namespace MeuCorre.Infra.Data.Context
         //Define a ligação entre a classe c# com a tabela do DB.
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<Conta> Contas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

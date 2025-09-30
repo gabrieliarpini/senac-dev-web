@@ -59,7 +59,7 @@ namespace MeuCorre.Infra.Data.Configurations
                 .IsRequired();
 
             builder.Property(conta => conta.Ativo)
-                .IsRequired(false);
+                .IsRequired(); 
 
             builder.Property(conta => conta.DataCriacao)
                 .IsRequired();
@@ -75,5 +75,5 @@ namespace MeuCorre.Infra.Data.Configurations
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
-    }
 }
+

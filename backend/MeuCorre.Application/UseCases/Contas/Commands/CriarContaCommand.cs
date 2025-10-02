@@ -2,20 +2,26 @@
 using MeuCorre.Domain.Entities;
 using MeuCorre.Domain.Enums;
 using MeuCorre.Domain.Interfaces.Repositories;
+using System.ComponentModel.DataAnnotations;
 
 namespace MeuCorre.Application.UseCases.Contas.Commands
 {
     public class CriarContaCommand : IRequest<CriarContaResponse>
     {
+        [Required(ErrorMessage = "É necessário informar o id do usuário")]
         public Guid UsuarioId { get; set; }
+        [Required]
+        [StringLength(50, MinimumLength = 2)]
         public string Nome { get; set; }
         public TipoConta Tipo { get; set; }
         public decimal Saldo { get; set; }
-        public string? CorHex { get; set; }
+        public string? Cor { get; set; }
         public decimal? Limite { get; set; }
         public int? DiaVencimento { get; set; }
         public int? DiaFechamento { get; set; }
     }
+
+    
     public class CriarContaCommandHandler : IRequestHandler<CriarContaCommand, CriarContaResponse>
     {
         private readonly IContaRepository _contaRepository;
@@ -55,10 +61,9 @@ namespace MeuCorre.Application.UseCases.Contas.Commands
                 nome: request.Nome,
                 tipo: request.Tipo,
                 saldo: request.Saldo,
-                corHex: request.CorHex,
+                cor: request.Cor,
                 limite: request.Limite,
-                diaVencimento: request.DiaVencimento,
-                diaFechamento: request.DiaFechamento
+                diaVencimento: request.DiaVencimento
             );
 
             await _contaRepository.AdicionarAsync(conta);
@@ -78,7 +83,18 @@ namespace MeuCorre.Application.UseCases.Contas.Commands
         public Guid ContaId { get; set; }
         public string Nome { get; set; }
         public TipoConta Tipo { get; set; }
+        public string? Cor { get; set; }
+        public string Moeda { get; set; }
         public decimal Saldo { get; set; }
+        public TipoLimite? Limite { get; set; }
+        public decimal? LimiteDisponivel { get; set; } // Calculado para cartões
+        public int? DiaVencimento { get; set; }
+        public bool Ativa { get; set; }
+
+        public void Deconstruct(out object mensagem, out object sucesso)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

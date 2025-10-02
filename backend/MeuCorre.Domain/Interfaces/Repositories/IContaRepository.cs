@@ -1,10 +1,5 @@
 ﻿using MeuCorre.Domain.Entities;
 using MeuCorre.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MeuCorre.Domain.Interfaces.Repositories
 {
@@ -19,5 +14,7 @@ namespace MeuCorre.Domain.Interfaces.Repositories
         Task<Conta?> ObterPorIdAsync(Guid contaId, Guid usuarioId);
         Task AtualizarAsync(Conta conta);
         Task<Conta> ObterPorIdAsync(object contaId);
+        Task ExcluirAsync(Conta conta);
+        Task ObterPorContaIdAsync(Guid contaId);
     }
 }

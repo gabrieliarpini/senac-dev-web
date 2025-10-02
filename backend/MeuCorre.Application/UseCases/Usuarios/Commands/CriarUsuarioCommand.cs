@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MeuCorre.Application.UseCases.Usuarios.Commands
 {
-    public class CriarContaCommad : IRequest<(string, bool)>
+    public class CriarUsuarioCommad : IRequest<(string, bool)>
     {
         [Required(ErrorMessage = "Nome é obrigatório!")]
         public string Nome { get; set; }
@@ -21,7 +21,7 @@ namespace MeuCorre.Application.UseCases.Usuarios.Commands
         public DateTime DataNascimento { get; set; }
     }
 
-    internal class CriarUsuarioCommandHandler : IRequestHandler<CriarContaCommad, (string,bool)>
+    internal class CriarUsuarioCommandHandler : IRequestHandler<CriarUsuarioCommad, (string,bool)>
     {
         private readonly IUsuarioRepository _usuarioRepository;
         public CriarUsuarioCommandHandler(IUsuarioRepository usuarioRepository)
@@ -29,7 +29,7 @@ namespace MeuCorre.Application.UseCases.Usuarios.Commands
             _usuarioRepository = usuarioRepository;
         }
 
-        public async Task<(string,bool)> Handle(CriarContaCommad request, CancellationToken cancellationToken)
+        public async Task<(string,bool)> Handle(CriarUsuarioCommad request, CancellationToken cancellationToken)
         {
             var usuarioExixtente = await _usuarioRepository.ObterPorEmail(request.Email);
             if (usuarioExixtente != null)

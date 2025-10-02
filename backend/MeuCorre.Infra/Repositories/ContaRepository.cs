@@ -1,6 +1,4 @@
-﻿using DocumentFormat.OpenXml.InkML;
-using DocumentFormat.OpenXml.Office2010.Excel;
-using MeuCorre.Domain.Entities;
+﻿using MeuCorre.Domain.Entities;
 using MeuCorre.Domain.Enums;
 using MeuCorre.Domain.Interfaces.Repositories;
 using MeuCorre.Infra.Data.Context;
@@ -38,6 +36,12 @@ namespace MeuCorre.Infra.Repositories
             return saldoTotal;
         }
 
+        public async Task ExcluirAsync(Conta conta)
+        {
+            _meuDbContext.Contas.Remove(conta);
+            await _meuDbContext.SaveChangesAsync();
+        }
+
         public async Task<bool> ExisteContaComNomeAsync(Guid contaId, string nome, Guid? contaIdExcluir = null)
         {
             var existe = await _meuDbContext.Contas
@@ -46,15 +50,32 @@ namespace MeuCorre.Infra.Repositories
             return existe;
         }
 
+        public Task ObterPorContaIdAsync(Guid contaId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Conta?> ObterPorIdAsync(Guid contaId)
         {
+            return await _meuDbContext.Contas.FirstOrDefaultAsync(u => u.Id == contaId);
+        }
+
+        public async Task<Conta?> ObterPorIdAsync(Guid contaId, Guid usuarioId)
+        {
+            return await _meuDbContext.Contas.FirstOrDefaultAsync(u => u.Id == contaId && u.UsuarioId == usuarioId);
+        }
+
+        public async Task<Conta?> ObterPorIdAsync(object contaId)
+        {
+            if (contaId is not Guid id)
+                throw new ArgumentException("O Id deve ser do tipo Guid", nameof(contaId));
+
             return await _meuDbContext.Contas.FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<Conta?> ObterPorIdEUsuarioAsync(Guid contaId, Guid usuarioId)
         {
-            var conta = await _meuDbContext.Contas.FindAsync(contaId,usuarioId);
-            return conta;
+            return await _meuDbContext.Contas.FirstOrDefaultAsync(u => u.Id == contaId && u.UsuarioId == usuarioId);
         }
 
         public async Task<List<Conta>> ObterPorTipoAsync(Guid usuarioId, TipoConta tipo)

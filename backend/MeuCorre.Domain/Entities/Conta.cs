@@ -6,20 +6,20 @@ namespace MeuCorre.Domain.Entities
 {
     public class Conta : Entidade
     {
-        private string? corHex;
+        private string? cor;
         private decimal? limite;
-        private int? diaFechamento;
+        private TipoConta tipo;
 
-        public Conta(Guid id, string nome, TipoConta tipo, decimal saldo, string? corHex, decimal? limite, int? diaVencimento, int? diaFechamento) : base(id)
+        public Conta(Guid id, string nome, TipoConta tipo, decimal saldo, string? cor, decimal? limite, int? diaVencimento) : base(id)
         {
             UsuarioId = id;
             Nome = nome;
             Tipo = tipo;
             Saldo = saldo;
-            this.corHex = corHex;
+            this.cor = cor;
             this.limite = limite;
             DiaVencimento = diaVencimento;
-            this.diaFechamento = diaFechamento;
+            
         }
 
         public Guid Id { get; set; }
@@ -46,6 +46,7 @@ namespace MeuCorre.Domain.Entities
         public Usuario Usuario { get; set; }
         public string Descricao { get; set; }
         public string Icone { get; set; }
+        public string Transacao { get; set; }
 
         public void AtualizarInformacoes(Guid contaId, string nome, string? cor, string? icone, decimal? limite, DateTime? fechamentoFatura, int? diaVencimento)
         {
@@ -66,6 +67,12 @@ namespace MeuCorre.Domain.Entities
         public void Inativar()
         {
             Ativo = false;
+            AtualizarDataMoficacao();
+        }
+
+        public void ReativarConta()
+        {
+            Ativo = true;
             AtualizarDataMoficacao();
         }
     }

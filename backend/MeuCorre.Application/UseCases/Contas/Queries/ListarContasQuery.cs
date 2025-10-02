@@ -21,12 +21,10 @@ namespace MeuCorre.Application.UseCases.Contas.Queries
         public string? Cor { get; set; }
         public string Moeda { get; set; }
         public decimal Saldo { get; set; }
-        public TipoLimite Limite { get; set; }
+        public TipoLimite? Limite { get; set; }
         public decimal? LimiteDisponivel { get; set; } // Calculado para cartões
         public int? DiaVencimento { get; set; }
         public bool Ativa { get; set; }
-
-
     }
 
     public class ListarContasQueryHandler : IRequestHandler<ListarContasQuery, List<ContaResumoResponse>>
@@ -42,20 +40,21 @@ namespace MeuCorre.Application.UseCases.Contas.Queries
         {
             var contas = await _contaRepository.ObterPorUsuarioAsync(request.UsuarioId);
 
-            // Aplicar filtros
+            // Filtros opcionais
             if (request.FiltrarPorTipo.HasValue)
                 contas = contas.Where(c => c.Tipo == request.FiltrarPorTipo.Value).ToList();
 
             if (request.ApenasAtivas)
                 contas = contas.Where(c => c.Ativo).ToList();
 
-            // Calcular limite disponível para cartões
+            // Montagem do resumo com cálculo de limite disponível
             var contasResumo = contas.Select(c =>
             {
                 decimal? limiteDisponivel = null;
-                if (c.Tipo == TipoConta.CartaoCredito && c.Limite != null)
+
+                if (c.Tipo == TipoConta.CartaoCredito && c.Limite.HasValue)
                 {
-                    limiteDisponivel = c.Limite - c.Saldo;
+                    limiteDisponivel = c.Limite.Value - c.Saldo;
                 }
 
                 return new ContaResumoResponse
@@ -66,15 +65,15 @@ namespace MeuCorre.Application.UseCases.Contas.Queries
                     Cor = c.Cor,
                     Moeda = c.Moeda,
                     Saldo = c.Saldo,
-                    Limite = (TipoLimite)c.Limite,
+                    Limite = (TipoLimite?)c.Limite,
                     LimiteDisponivel = limiteDisponivel,
                     DiaVencimento = c.DiaVencimento,
                     Ativa = c.Ativo
                 };
             }).ToList();
 
-            // Ordenar
-            contasResumo = request.OrdenarPor.ToLower() switch
+            // Ordenação
+            contasResumo = request.OrdenarPor?.ToLower() switch
             {
                 "saldo" => contasResumo.OrderByDescending(c => c.Saldo).ToList(),
                 "tipo" => contasResumo.OrderBy(c => c.Tipo).ToList(),

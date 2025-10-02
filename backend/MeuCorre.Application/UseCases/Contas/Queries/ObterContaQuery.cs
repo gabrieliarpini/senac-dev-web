@@ -66,7 +66,7 @@ namespace MeuCorre.Application.UseCases.Contas.Queries
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
-        public string? Cor { get; set; }
+        public string Cor { get; set; }
         public TipoConta Tipo { get; set; }
         public string Moeda { get; set; }
         public decimal Saldo { get; set; }

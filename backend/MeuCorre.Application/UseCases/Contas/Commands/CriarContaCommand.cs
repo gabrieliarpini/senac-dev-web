@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using DocumentFormat.OpenXml.Presentation;
+using MediatR;
 using MeuCorre.Domain.Entities;
 using MeuCorre.Domain.Enums;
 using MeuCorre.Domain.Interfaces.Repositories;
@@ -15,10 +16,21 @@ namespace MeuCorre.Application.UseCases.Contas.Commands
         public string Nome { get; set; }
         public TipoConta Tipo { get; set; }
         public decimal Saldo { get; set; }
-        public string? Cor { get; set; }
+        public string Cor { get; set; }
         public decimal? Limite { get; set; }
         public int? DiaVencimento { get; set; }
         public int? DiaFechamento { get; set; }
+        public decimal Moeda { get; set; }
+        public decimal VencimentoPrimeiraFatura { get; set; }
+        public decimal FechamentoFatura { get; set; }
+        public decimal SaldoFaturaAnterior { get; set; }
+        public decimal? CredorDevedor { get; set; }
+        public int? PreverDebitoNaConta { get; set; }
+        public int? Ativo { get; set; }
+        public decimal DataCriacao { get; set; }
+        public decimal DataAtualizacao { get; set; }
+        public decimal Icone { get; set; }
+        public Text Descricao { get; set; }
     }
 
     

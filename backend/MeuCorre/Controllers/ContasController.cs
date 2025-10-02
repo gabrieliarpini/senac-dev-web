@@ -1,14 +1,14 @@
 ﻿using MediatR;
 using MeuCorre.Application.UseCases.Contas.Commands;
 using MeuCorre.Application.UseCases.Contas.Queries;
-using MeuCorre.Application.UseCases.Usuarios.Commands;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MeuCorre.Controllers
 {
 
     [ApiController]
-    [Route("api/v1/contas")]
+    [Route("[controller]")]
+
     public class ContasController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -21,7 +21,7 @@ namespace MeuCorre.Controllers
         public async Task<IActionResult> CriarConta([FromBody] CriarContaCommand command)
         {
             var (mensagem, sucesso) = await _mediator.Send(command);
-            if (sucesso)
+            if ((bool)sucesso)
             {
                 return Ok(mensagem);
             }

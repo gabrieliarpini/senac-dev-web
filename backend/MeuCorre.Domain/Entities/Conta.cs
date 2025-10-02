@@ -6,17 +6,17 @@ namespace MeuCorre.Domain.Entities
 {
     public class Conta : Entidade
     {
-        private string? cor;
+        private string cor;
         private decimal? limite;
         private TipoConta tipo;
 
-        public Conta(Guid id, string nome, TipoConta tipo, decimal saldo, string? cor, decimal? limite, int? diaVencimento) : base(id)
+        public Conta(Guid id, string nome, TipoConta tipo, decimal saldo, string cor, decimal? limite, int? diaVencimento) : base(id)
         {
             UsuarioId = id;
             Nome = nome;
             Tipo = tipo;
             Saldo = saldo;
-            this.cor = cor;
+            cor = cor;
             this.limite = limite;
             DiaVencimento = diaVencimento;
             
@@ -26,7 +26,7 @@ namespace MeuCorre.Domain.Entities
         [Required]
         [StringLength(50, MinimumLength = 2)]
         public string Nome { get; set; }
-        public string? Cor { get; set; } // Ex: "#FFFFFF"
+        public string Cor { get; set; } // Ex: "#FFFFFF"
         [Required]
         public TipoConta Tipo { get; set; } // Ex: "Cartão de credito"
         public string Moeda { get; set; } // Ex: "BRL"
@@ -44,9 +44,8 @@ namespace MeuCorre.Domain.Entities
         public DateTime DataCriacao { get; set; }
         public DateTime? DataAtualizacao { get; set; }
         public Usuario Usuario { get; set; }
-        public string Descricao { get; set; }
         public string Icone { get; set; }
-        public string Transacao { get; set; }
+        public string Descricao { get; set; }
 
         public void AtualizarInformacoes(Guid contaId, string nome, string? cor, string? icone, decimal? limite, DateTime? fechamentoFatura, int? diaVencimento)
         {

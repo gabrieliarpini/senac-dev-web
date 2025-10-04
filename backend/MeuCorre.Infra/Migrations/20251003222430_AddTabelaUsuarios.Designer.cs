@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeuCorre.Infra.Migrations
 {
     [DbContext(typeof(MeuDbContext))]
-    [Migration("20250930005100_AddTabelaContas")]
-    partial class AddTabelaContas
+    [Migration("20251003222430_AddTabelaUsuarios")]
+    partial class AddTabelaUsuarios
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -98,6 +98,10 @@ namespace MeuCorre.Infra.Migrations
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<int?>("DiaVencimento")
                         .IsRequired()
                         .HasColumnType("int");
@@ -106,8 +110,13 @@ namespace MeuCorre.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("Limite")
-                        .HasColumnType("int");
+                    b.Property<string>("Icone")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<decimal?>("Limite")
+                        .IsRequired()
+                        .HasColumnType("decimal(65,30)");
 
                     b.Property<string>("Moeda")
                         .IsRequired()

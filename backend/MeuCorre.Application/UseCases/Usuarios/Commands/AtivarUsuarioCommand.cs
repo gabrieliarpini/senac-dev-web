@@ -2,7 +2,7 @@
 using MeuCorre.Domain.Interfaces.Repositories;
 using System.ComponentModel.DataAnnotations;
 
-namespace MeuCorre.Application.UseCases.Usuario.Commands
+namespace MeuCorre.Application.UseCases.Usuarios.Commands
 {
     public class AtivarUsuarioCommand : IRequest<(string, bool)>
     {

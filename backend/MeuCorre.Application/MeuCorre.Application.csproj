@@ -10,7 +10,6 @@
     <Folder Include="Common\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Mappers\" />
-    <Folder Include="UseCases\Contas\" />
     <Folder Include="UseCases\Relatorios\" />
     <Folder Include="UseCases\Transacoes\" />
     <Folder Include="Validators\" />
@@ -24,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MeuCorre.Domain\MeuCorre.Domain.csproj" />
+    <ProjectReference Include="..\MeuCorre.Infra\MeuCorre.Infra.csproj" />
   </ItemGroup>
 
 </Project>

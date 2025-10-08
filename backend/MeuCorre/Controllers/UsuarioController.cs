@@ -18,7 +18,7 @@ namespace MeuCorre.Controllers
         ///<param name="command"></param>
         /// </summary>
         [HttpPost]
-        public async Task<IActionResult> CriarUsuario([FromBody] CriarUsuarioCommand command)
+        public async Task<IActionResult> CriarUsuario([FromBody] CriarUsuarioCommad command)
         {
             var (mensagem, sucesso) = await _mediator.Send(command);
             if (sucesso)

@@ -2,6 +2,7 @@
 using MeuCorre.Application.UseCases.Categorias.Commands;
 using MeuCorre.Application.UseCases.Categorias.Dtos;
 using MeuCorre.Application.UseCases.Categorias.Queries;
+using MeuCorre.Application.UseCases.Contas.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MeuCorre.Controllers
@@ -9,7 +10,6 @@ namespace MeuCorre.Controllers
     [ApiController]
     [Route("[controller]")]
 
-    
     public class CategoriaController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -17,19 +17,17 @@ namespace MeuCorre.Controllers
         {
             _mediator = mediator;
         }
-        ///<summary>
-        /// Cria novas categorias para o usuários
-        ///<summary>
-        ///Cria um novo usuário.
-        ///<para name="command"> Os dados da nova categoriam</param>
-        /// <return>retorna uma categoria criarda</returns>
-        /// 
+
+
+        /// <summary>
+        /// Cria uma nova categoria para o usuário
+        /// </summary>
+        /// <param name="command">Os dados da nova categoria</param>
+        /// <returns>Retorna uma nova categoria criada</returns>
         [HttpPost]
         [ProducesResponseType(typeof(CategoriaDto), 201)]
-        [ProducesResponseType (400)]
+        [ProducesResponseType(400)]
         [ProducesResponseType(409)]
-
-
         public async Task<IActionResult> CriarCategoria([FromBody] CriarCategoriaCommad command)
         {
             var (mensagem, sucesso) = await _mediator.Send(command);
@@ -63,7 +61,7 @@ namespace MeuCorre.Controllers
             var (mensagem, sucesso) = await _mediator.Send(command);
             if (sucesso)
             {
-                return Ok(mensagem);
+                return NoContent();
             }
             else
             {
@@ -72,24 +70,9 @@ namespace MeuCorre.Controllers
         }
 
         [HttpPatch("ativar/{id}")]
-        public async Task<IActionResult> AtivarCategoria(Guid Id)
+        public async Task<IActionResult> AtivarCategoria(Guid id)
         {
-            var command = new AtivarCategoriaCommand { CategoriaId = Id };
-            var (mensagem, sucesso) = await _mediator.Send(command);
-            if (sucesso)
-            {
-                return Ok(mensagem);
-            }
-            else
-            {
-                return BadRequest("Categoria possivelmente não encontrada.");
-            }
-        }
-
-        [HttpPatch("inativar/{id}")]
-        public async Task<IActionResult> InativarCategoria(Guid Id)
-        {
-            var command = new InativarCategoriaCommand { CategoriaId = Id };
+            var command = new AtivarCategoriaCommand { CategoriaId = id };
             var (mensagem, sucesso) = await _mediator.Send(command);
             if (sucesso)
             {
@@ -100,15 +83,33 @@ namespace MeuCorre.Controllers
                 return BadRequest(mensagem);
             }
         }
+
+
+        [HttpPatch("inativar/{id}")]
+        public async Task<IActionResult> InativarCategoria(Guid id)
+        {
+            var command = new InativarCategoriaCommand { CategoriaId = id };
+            var (mensagem, sucesso) = await _mediator.Send(command);
+            if (sucesso)
+            {
+                return NoContent();
+            }
+            else
+            {
+                return BadRequest(mensagem);
+            }
+        }
+
+
         [HttpGet]
-        public async Task<ActionResult> ObterCategoriaPorUsuario([FromQuery]ListarTodasCategoriasQuery query)
+        public async Task<IActionResult> ObterCategoriasPorUsuario([FromQuery] ListarTodasCategoriasQuery query)
         {
             var categorias = await _mediator.Send(query);
             return Ok(categorias);
-
         }
+
         [HttpGet("{id}")]
-        public async Task<ActionResult> ObterCategoriaPorId(Guid id)
+        public async Task<IActionResult> ObterCategoriaPorId(Guid id)
         {
             var query = new ObterCategoriaQuery() { CategoriaId = id };
             var categoria = await _mediator.Send(query);
@@ -117,8 +118,9 @@ namespace MeuCorre.Controllers
                 return NotFound("Categoria não encontrada");
             }
             return Ok(categoria);
-
         }
 
+        
     }
+
 }

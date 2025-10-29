@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --mc-roxo: #592EF2;
+    --mc-preto: #000000;
+    --mc-cinza: #BFCAD9;
+    --mc-verde-claro: #29F280;
+    --mc-verde-escuro: #24733F;
+    --mc-verde-florescente:#16c64f;
+    --mg-branco: #FFFFFF;
+}
+
+.mc-bg-roxo {
+    background-color: var(--mc-roxo);
+}
+
+.mc-bg-preto {
+    background-color: var(--mc-preto);
+}
+.mc-bg-cinza {
+    background-color: var(--mc-cinza);
+}
+
+.mc-bg-verde-claro {
+    background-color: var(--mc-verde-claro);
+}
+
+.mg-bg-verde-escuro {
+    background-color: var(--mc-verde-escuro);
+}
+
+.mc-verde-florescente {
+    background-color: var(--mc-verde-florescente);
+}
+
+.mg-text-branco{
+    color: var(--mc-branco);
+}

@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'remixicon/fonts/remixicon.css';
+
 :root {
     --mc-roxo: #592EF2;
     --mc-preto: #000000;
@@ -33,5 +35,5 @@
 }
 
 .mg-text-branco{
-    color: var(--mc-branco);
+    color: var(--mg-branco);
 }

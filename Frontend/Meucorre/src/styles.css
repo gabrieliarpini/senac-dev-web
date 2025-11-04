@@ -37,3 +37,15 @@
 .mg-text-branco{
     color: var(--mg-branco);
 }
+
+.mg-text-verde-escuro{
+    color: var(--mg-verde-escuro);
+}
+
+.btn-outline-secondary {
+    --bs-btn-color: #A0A0A0;
+    --bs-btn-border-color: #faf7f7;
+    --bs-btn-hover-color: #fdf8f8;
+    --bs-btn-hover-bg: #e0e5e9;
+    --bs-btn-hover-border-color: #ffffff;
+}

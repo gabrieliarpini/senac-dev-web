@@ -1,58 +1,62 @@
-<nav class="navbar mc-verde-florescente">
-  <div class="container-xxl">
-    <a class="navbar-brand mg-text-branco" href="#">
-      <img src="../assets/img/logomeucorre.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-    </a>
 
-    <ul class="nav justify-content-center ">
-      <li class="nav-item">
-        <a class="nav-link active mg-text-branco" href="#">visão geral</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active mg-text-branco" href="#">lançamentos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active mg-text-branco" href="#">relatórios</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active mg-text-branco" href="#">limite de gastos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active mg-text-branco" href="#">conexão bancária</a>
-      </li>
-    </ul>
+  <nav class="navbar mc-verde-florescente">
+    <div class="container-xxl">
+      <a class="navbar-brand mg-text-branco" href="#">
+        <img src="../assets/img/logomeucorre.png" alt="Logo" width="30" height="24"
+          class="d-inline-block align-text-top">
+      </a>
 
-    <ul class="nav justify-content-end">
-      <li class="nav-item">
-        <div ngbDropdown>
-          <a class="nav-link active mg-text-branco" href="#" id="dropConfiguração" ngbDropdownToggle>
-            <i class="ri-settings-2-line ri-lg">
-            </i>
-          </a>
-          <div ngbDropdownMenu aria-labelledby="dropConfiguração">
-            <button ngbDropdownItem>Categorias</button>
-            <button ngbDropdownItem>Contas</button>
-            <button ngbDropdownItem>Cartões de crédito</button>
-            <div class="dropdown-divider"></div>
-            <button ngbDropdownItem>Preferências</button>
+      <ul class="nav justify-content-center ">
+        <li class="nav-item">
+          <a class="nav-link active mg-text-branco" href="#">visão geral</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active mg-text-branco" href="#">lançamentos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active mg-text-branco" href="#">relatórios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active mg-text-branco" href="#">limite de gastos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active mg-text-branco" href="#">conexão bancária</a>
+        </li>
+      </ul>
 
+      <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <div ngbDropdown>
+            <a class="nav-link active mg-text-branco" href="#" id="dropConfiguração" ngbDropdownToggle>
+              <i class="ri-settings-2-line ri-lg">
+              </i>
+            </a>
+            <div ngbDropdownMenu aria-labelledby="dropConfiguração">
+              <a routerLink="/config/categorias" ngbDropdownItem>Categorias</a>
+              <button ngbDropdownItem>Contas</button>
+              <button ngbDropdownItem>Cartões de crédito</button>
+              <div class="dropdown-divider"></div>
+              <button ngbDropdownItem>Preferências</button>
+
+            </div>
           </div>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link mg-text-branco" href="#"> <i class="ri-notification-2-line ri-lg"> </i></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link mg-text-branco" href="#"> <i class="ri-account-circle-line ri-lg"></i> </a>
-      </li>
-    </ul>
-  </div>
-</nav>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mg-text-branco" href="#"> <i class="ri-notification-2-line ri-lg"> </i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mg-text-branco" href="#"> <i class="ri-account-circle-line ri-lg"></i> </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-<nav class="navbar bg-white mb-5">
-  <div class="container-xxl">
-    <b>Teste Grátis </b>
-    <p>7 dias restantes</p>
+  <nav class="navbar bg-white mb-5">
+    <div class="container-xxl">
+      <b>Teste Grátis </b>
+      <p>7 dias restantes</p>
+    </div>
+  </nav>
+  <div class="container-lg">
+     <router-outlet> </router-outlet>
   </div>
-</nav>
-<router-outlet> </router-outlet>

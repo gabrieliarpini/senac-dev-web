@@ -22,3 +22,7 @@
 .nav-tabs .nav-link:hover {
     border: transparent;
 }
+
+.card{
+    margin-right: 350px;
+}

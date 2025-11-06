@@ -5,21 +5,20 @@
 
 .nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link.active {
-    color: var(--bs-nav-tabs-link-active-color);
+    color: var(--mc-verde-escuro);
     background-color: transparent;
-    border-color: transparent;
-    border-bottom: 3px solid #129E3F;
-    color:#24733F;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-width: none;
+    border-bottom: 3px solid var(--mc-verde-escuro);
 }
 
-.nav-link {
-    display: block;
-    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
-    font-size: var(--bs-nav-link-font-size);
-    font-weight: var(--bs-nav-link-font-weight);
-    text-decoration: none;
-    background: 0 0;
-    border: 0;
-    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
-    
+.nav-tabs .nav-item {
+    width: 50%;
+    text-align: center;
+}
+
+.nav-tabs .nav-link:hover {
+    border: transparent;
 }

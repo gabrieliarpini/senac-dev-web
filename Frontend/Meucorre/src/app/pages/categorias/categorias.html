@@ -18,17 +18,22 @@
                                 <th scope="col">Nome</th>
                                 <th scope="col">Descrição</th>
                                 <th scope="col">Cor</th>
-                                <th scope="col">Ativo</th>
+                                <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             @for (despesa of categorias_despesas; track despesa.nome; let i = $index) {
                             <tr>
-                                <td> <i class="{{despesa.icone}}"></i> </td>
+                                <td>
+                                    <app-icon-avatar [icone]="despesa.icone" [cor]="despesa.cor"></app-icon-avatar>
+                                </td>
                                 <td>{{ despesa.nome}}</td>
                                 <td>{{ despesa.descricao}}</td>
-                                <td>{{ despesa.cor}}</td>
-                                <td>{{ despesa.ativo}}</td>
+                                <td>{{despesa.cor}}</td>
+                                <td>
+                                    <app-status-badge [status]="despesa.status"></app-status-badge>
+                                </td>
+                                <td>botao</td>
                             </tr>
                             }
                         </tbody>
@@ -45,17 +50,22 @@
                                 <th scope="col">Nome</th>
                                 <th scope="col">Descrição</th>
                                 <th scope="col">Cor</th>
-                                <th scope="col">Ativo</th>
+                                <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             @for (receita of categorias_receitas; track receita.nome; let i = $index) {
                             <tr>
-                                <td> <i class="{{receita.icone}}"></i> </td>
+                                <td>
+                                    <app-icon-avatar [icone]="receita.icone" [cor]="receita.cor"></app-icon-avatar>
+                                </td>
                                 <td>{{ receita.nome}}</td>
                                 <td>{{ receita.descricao}}</td>
-                                <td>{{ receita.cor}}</td>
-                                <td>{{ receita.ativo}}</td>
+                                <td>{{receita.cor}}</td>
+                                <td>
+                                    <app-status-badge [status]="receita.status"></app-status-badge>
+                                </td>
+                                <td>botao</td>
                             </tr>
                             }
                         </tbody>
@@ -65,8 +75,6 @@
         </ul>
 
         <div [ngbNavOutlet]="nav" class="mt-2"></div>
-
-
 
         <pre>Active: {{ active }}</pre>
     </div>

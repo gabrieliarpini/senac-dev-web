@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { CategoriaModel } from './models/categoria.model';
+import { IconAvatar } from "../../shared/components/icon-avatar/icon-avatar";
+import { StatusBadge } from "../../shared/components/status-badge/status-badge/status-badge";
 
 @Component({
   selector: 'app-categorias',
-  imports: [NgbNavModule],
+  imports: [NgbNavModule, IconAvatar, StatusBadge],
   templateUrl: './categorias.html',
   styleUrl: './categorias.css',
 })
@@ -17,24 +19,24 @@ export class Categorias {
       nome: 'Salário', 
       descricao: 'Recebimento mensal', 
       cor: '#28a745', 
-      icone: '', 
-      ativo: true
+      icone: 'ri-bank-line', 
+      status: true
     },
     {
       id: '2',
       nome: 'Freelance',
       descricao: 'Trabalhos avulsos',
       cor: '#17a2b8',
-      icone: '',
-      ativo: true
+      icone: 'ri-briefcase-line',
+      status: true
     },
     {
       id: '3',
       nome: 'Investimentos',
       descricao: 'Rendimentos de investimentos',
       cor: '#ffc107',
-      icone: '',
-      ativo: true
+      icone: 'ri-line-chart-line',
+      status: true
     },
   ];
 
@@ -44,24 +46,24 @@ export class Categorias {
       nome: 'Alimentação',
       descricao: 'Alimentação',
       cor: '#dc3545',
-      icone: 'fas fa-utensils',
-      ativo: true
+      icone: 'ri-restaurant-line',
+      status: true
     },
     {
       id: '2',
       nome: 'Transporte',
       descricao: 'Despesas com transporte',
       cor: '#fd7e14',
-      icone: 'fas fa-bus',
-      ativo: true
+      icone: 'ri-bus-line',
+      status: true
     },
     {
       id: '3',
       nome: 'Lazer',
       descricao: 'Despesas com lazer',
       cor: '#ffc107',
-      icone: 'fas fa-film' ,
-      ativo: true
+      icone: 'ri-film-line' ,
+      status: true
     },
   ];
 }

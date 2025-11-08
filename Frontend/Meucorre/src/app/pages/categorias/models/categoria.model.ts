@@ -4,5 +4,5 @@ export interface CategoriaModel{
     descricao: string;
     cor: string;
     icone:string;
-    ativo:boolean;
+    status:boolean;
 }

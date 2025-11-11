@@ -26,3 +26,9 @@
 .card{
     margin-right: 350px;
 }
+
+.btn[_ngcontent-ng-c3870319942] {
+    background-color: transparent;
+    border: 2px solid #66aa8a;
+    color:#046135;
+}

@@ -2,7 +2,7 @@
     <div class="card-body ">
         <div class="d-flex">
             <h5 class="card-title">Categorias</h5>
-            <button class="btn btn-sm btn-success ms-auto">
+            <button class="btn btn-sm btn-success ms-auto" (click)="open(content)">
                 <i class="ri-add-line me-1"></i>Nova Categoria
             </button>
         </div>
@@ -77,5 +77,41 @@
         <div [ngbNavOutlet]="nav" class="mt-2"></div>
 
         <pre>Active: {{ active }}</pre>
+
+        <ng-template #content let-modal>
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-basic-title">Criando categoria</h6>
+                <button type="button" class="btn-close" aria-label="Close"
+                    (click)="modal.dismiss('Cross click')"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="txtNome" class="form-label">Nome</label>
+                        <input [formControl]="nome" type="text" class="form-control" id="txtNome"/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="txtDescricao" class="form-label">Descrição</label>
+                        <input [formControl]="descricao" type="text" class="form-control" id="txtDescricao"/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="txtCor" class="form-label">Cor</label>
+                        <input [formControl]="cor" type="color" class="form-control" id="txtCor"/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="txtIcone" class="form-label">Icone</label>
+                        <input [formControl]="icone" type="text" class="form-control" id="txtIcone" placeholder="ri ri-add-line"/>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary"
+                    (click)="cadastrarCategoria()">Salvar</button>
+            </div>
+        </ng-template>
+        <pre>{{ closeResult() }}</pre>
     </div>
 </div>

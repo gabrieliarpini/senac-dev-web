@@ -4,5 +4,6 @@ export interface CategoriaModel{
     descricao: string;
     cor: string;
     icone:string;
+    tipo:string;
     status:boolean;
 }

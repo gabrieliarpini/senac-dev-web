@@ -7,7 +7,7 @@
             </button>
         </div>
 
-        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs ">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
             <li [ngbNavItem]="1">
                 <a ngbNavLink>Despesa</a>
                 <ng-template ngbNavContent>
@@ -22,7 +22,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @for (despesa of categorias_despesas; track despesa.nome; let i = $index) {
+                            @for (despesa of categorias; track despesa.nome; let i = $index) {
                             <tr>
                                 <td>
                                     <app-icon-avatar [icone]="despesa.icone" [cor]="despesa.cor"></app-icon-avatar>
@@ -33,7 +33,18 @@
                                 <td>
                                     <app-status-badge [status]="despesa.status"></app-status-badge>
                                 </td>
-                                <td>botao</td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-success btn-sm mt-2 me-1"
+                                        placement="top" ngbTooltip="Editar categoria">
+                                        <i class="ri-pencil-line me-1"></i>
+                                    </button>
+
+                                    <button (click)="deletarCategoriaDespesa(despesa.id)" type="button "
+                                        class="btn btn-outline-danger btn-sm mt-2" placement="top"
+                                        ngbTooltip="Excluir categoria">
+                                        <i class="ri-delete-bin-6-line me-1"></i>
+                                    </button>
+                                </td>
                             </tr>
                             }
                         </tbody>
@@ -54,7 +65,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @for (receita of categorias_receitas; track receita.nome; let i = $index) {
+                            @for (receita of categorias; track receita.nome; let i = $index) {
                             <tr>
                                 <td>
                                     <app-icon-avatar [icone]="receita.icone" [cor]="receita.cor"></app-icon-avatar>
@@ -65,7 +76,18 @@
                                 <td>
                                     <app-status-badge [status]="receita.status"></app-status-badge>
                                 </td>
-                                <td>botao</td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-success btn-sm mt-2 me-1"
+                                        placement="top" ngbTooltip="Editar receita">
+                                        <i class="ri-pencil-line me-1"></i>
+                                    </button>
+
+                                    <button (click)="deletarCategoriaReceita(receita.id)" type="button "
+                                        class="btn btn-outline-danger btn-sm mt-2" placement="top"
+                                        ngbTooltip="Excluir receita">
+                                        <i class="ri-delete-bin-6-line me-1"></i>
+                                    </button>
+                                </td>
                             </tr>
                             }
                         </tbody>
@@ -88,30 +110,31 @@
                 <form>
                     <div class="mb-3">
                         <label for="txtNome" class="form-label">Nome</label>
-                        <input [formControl]="nome" type="text" class="form-control" id="txtNome"/>
+                        <input [formControl]="nome" type="text" class="form-control" id="txtNome" />
                     </div>
 
                     <div class="mb-3">
                         <label for="txtDescricao" class="form-label">Descrição</label>
-                        <input [formControl]="descricao" type="text" class="form-control" id="txtDescricao"/>
+                        <input [formControl]="descricao" type="text" class="form-control" id="txtDescricao" />
                     </div>
 
                     <div class="mb-3">
                         <label for="txtCor" class="form-label">Cor</label>
-                        <input [formControl]="cor" type="color" class="form-control" id="txtCor"/>
+                        <input [formControl]="cor" type="color" class="form-control" id="txtCor" />
                     </div>
 
                     <div class="mb-3">
                         <label for="txtIcone" class="form-label">Icone</label>
-                        <input [formControl]="icone" type="text" class="form-control" id="txtIcone" placeholder="ri ri-add-line"/>
+                        <input [formControl]="icone" type="text" class="form-control" id="txtIcone"
+                            placeholder="ri ri-add-line" />
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary"
-                    (click)="cadastrarCategoria()">Salvar</button>
+                <button type="button" class="btn btn-outline-secondary" (click)="cadastrarCategoria()">Salvar</button>
             </div>
         </ng-template>
+
         <pre>{{ closeResult() }}</pre>
     </div>
 </div>

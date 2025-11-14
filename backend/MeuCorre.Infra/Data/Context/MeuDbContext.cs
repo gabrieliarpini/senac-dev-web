@@ -18,7 +18,6 @@ namespace MeuCorre.Infra.Data.Context
         //Define a ligação entre a classe c# com a tabela do DB.
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
-        public DbSet<Conta> Contas {  get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -142,29 +141,6 @@ namespace MeuCorre.Infra.Data.Context
                 }
             );
 
-            modelBuilder.Entity<Conta>().HasData( new
-            {
-                Id = Guid.Parse("62cf4c01-9482-4e69-abf9-bdf9a7a911b1"), // pode trocar para outro Guid
-                UsuarioId = usuarioId,
-                Nome = "Carteira",
-                Cor = "#000000",
-                Tipo = TipoConta.Carteira, // Enum definido no projeto
-                Moeda = "BRL",
-                Saldo = 0m,
-                Limite = (decimal?)null,
-                DiaVencimento = (int?)null,
-                VencimentoPrimeiraFatura = (DateTime?)null,
-                FechamentoFatura = (DateTime?)null,
-                SaldoFaturaAnterior = (decimal?)null,
-                CredorDevedor = (string?)null,
-                PreverDebitoNaConta = false,
-                Ativo = true,
-                DataCriacao = new DateTime(2025, 1, 1),
-                DataAtualizacao = (DateTime?)null,
-                Icone = "👛", // ícone de carteira
-                Descricao = "Conta física em dinheiro (espécie)"
-            }
-);
         }
     }
 }

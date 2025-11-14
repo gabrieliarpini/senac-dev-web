@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeuCorre.Infra.Migrations
 {
     [DbContext(typeof(MeuDbContext))]
-    [Migration("20251003232940_AddSeed")]
-    partial class AddSeed
+    [Migration("20251113234253_add-usuario-categoria")]
+    partial class addusuariocategoria
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -172,91 +172,6 @@ namespace MeuCorre.Infra.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MeuCorre.Domain.Entities.Conta", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("Cor")
-                        .IsRequired()
-                        .HasMaxLength(7)
-                        .HasColumnType("varchar(7)");
-
-                    b.Property<string>("CredorDevedor")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime?>("DataAtualizacao")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("DataCriacao")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int?>("DiaVencimento")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("FechamentoFatura")
-                        .IsRequired()
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Icone")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<decimal?>("Limite")
-                        .IsRequired()
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<string>("Moeda")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<bool>("PreverDebitoNaConta")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<decimal>("Saldo")
-                        .HasMaxLength(50)
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<decimal?>("SaldoFaturaAnterior")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<int>("Tipo")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("UsuarioId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime?>("VencimentoPrimeiraFatura")
-                        .IsRequired()
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PreverDebitoNaConta")
-                        .IsUnique();
-
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("Contas", (string)null);
-                });
-
             modelBuilder.Entity("MeuCorre.Domain.Entities.Usuario", b =>
                 {
                     b.Property<Guid>("Id")
@@ -320,22 +235,9 @@ namespace MeuCorre.Infra.Migrations
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("MeuCorre.Domain.Entities.Conta", b =>
-                {
-                    b.HasOne("MeuCorre.Domain.Entities.Usuario", "Usuario")
-                        .WithMany("Conta")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Usuario");
-                });
-
             modelBuilder.Entity("MeuCorre.Domain.Entities.Usuario", b =>
                 {
                     b.Navigation("Categorias");
-
-                    b.Navigation("Conta");
                 });
 #pragma warning restore 612, 618
         }

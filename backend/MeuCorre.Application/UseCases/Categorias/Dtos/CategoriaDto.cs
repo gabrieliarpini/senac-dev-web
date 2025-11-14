@@ -4,7 +4,7 @@ namespace MeuCorre.Application.UseCases.Categorias.Dtos
 {
     public record CategoriaDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Nome { get; set; }
         public string? Descricao { get; set; }
         public string? Cor { get; set; }
